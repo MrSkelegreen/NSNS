@@ -1,0 +1,74 @@
+<UserControl
+    Background="#171C2C"
+    Foreground="White"
+    d:DesignHeight="600"
+    d:DesignWidth="400"
+    mc:Ignorable="d"
+    x:Class="NewNsns.Views.MainView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="clr-namespace:NewNsns.ViewModels"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.DataContext>
+        <viewModels:MainViewModel />
+    </Design.DataContext>
+    
+    <Grid Background="White">
+        
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="35" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto"/>
+            
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="60" />
+            <RowDefinition Height="250" />
+            <RowDefinition Height="100" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!--  Боковая панель  -->
+        <StackPanel Background="LightGray" Grid.RowSpan="7" Orientation="Vertical">
+            
+            <Button></Button>
+            
+        </StackPanel>
+        
+        
+
+        <!--  Выбор режима  -->
+        <StackPanel
+            Background="LightGray"
+            Grid.Column="2"
+            Grid.Row="1"
+            Orientation="Horizontal" Width="260" Height="50">
+
+            <Button Width="110" FontSize="20" Margin="10,0,10,0">
+                Nutrients
+            </Button>
+
+            <Button Width="110" HorizontalContentAlignment="Center" FontSize="20" Margin="10,0,10,0">
+                <TextBlock Text="Recipes"></TextBlock>
+            </Button>
+        </StackPanel>
+       
+        
+        <!-- Поле для ввода -->
+        <TextBox Name="TBox" Grid.Column="2" Grid.Row="3" Width="300"/>
+        
+        <!--  Поиск  -->
+        <StackPanel Grid.Column="2" Grid.Row="5">
+            <Button Background="Black" HorizontalAlignment="Center" FontSize="40">Search</Button>
+        </StackPanel>
+        
+    </Grid>
+
+</UserControl>
