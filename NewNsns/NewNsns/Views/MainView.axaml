@@ -14,8 +14,7 @@
         <viewModels:MainViewModel />
     </Design.DataContext>
     
-    <Grid Background="White">
-        
+    <Grid Background="White" ShowGridLines="True">
         
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="35" />
@@ -37,9 +36,17 @@
 
         <!--  Боковая панель  -->
         <StackPanel Background="LightGray" Grid.RowSpan="7" Orientation="Vertical">
-            
-            <Button></Button>
-            
+            <Image Name="SettingsBtn" Source="../Assets/cog.png" Tapped="SettingsBtn_OnTapped">
+                 <FlyoutBase.AttachedFlyout>
+                     <MenuFlyout>
+                         <StackPanel Height="1000" Width="100">
+                             <Button Content="Favorites"/>
+                             <Button Content="Contact us" Margin="0,10,0,0"/>
+                         </StackPanel>
+                         
+                     </MenuFlyout>
+                 </FlyoutBase.AttachedFlyout>
+            </Image>
         </StackPanel>
         
         
@@ -51,11 +58,11 @@
             Grid.Row="1"
             Orientation="Horizontal" Width="260" Height="50">
 
-            <Button Width="110" FontSize="20" Margin="10,0,10,0">
+            <Button Name="NutrientsBtn" Width="110" FontSize="20" Margin="10,0,10,0" Click="NutrientsMode_OnClick">
                 Nutrients
             </Button>
 
-            <Button Width="110" HorizontalContentAlignment="Center" FontSize="20" Margin="10,0,10,0">
+            <Button Name="RecipeBtn" Width="110" HorizontalContentAlignment="Center" FontSize="20" Margin="10,0,10,0" Click="RecipeBtn_OnClick">
                 <TextBlock Text="Recipes"></TextBlock>
             </Button>
         </StackPanel>
