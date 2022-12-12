@@ -16,6 +16,7 @@
     
     <Grid Background="White" ShowGridLines="True">
         
+        <!-- Разметка -->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="35" />
             <ColumnDefinition Width="*" />
@@ -40,16 +41,14 @@
                  <FlyoutBase.AttachedFlyout>
                      <MenuFlyout>
                          <StackPanel Height="1000" Width="100">
-                             <Button Content="Favorites"/>
-                             <Button Content="Contact us" Margin="0,10,0,0"/>
+                             <!-- TODO Кнопки Избранное и Связь -->
+                             <Button Name="FavoritesBtn" Content="Favorites"/>
+                             <Button Name="ContactBtn" Content="Contact us" Margin="0,10,0,0"/>
                          </StackPanel>
-                         
                      </MenuFlyout>
                  </FlyoutBase.AttachedFlyout>
             </Image>
         </StackPanel>
-        
-        
 
         <!--  Выбор режима  -->
         <StackPanel
@@ -58,22 +57,44 @@
             Grid.Row="1"
             Orientation="Horizontal" Width="260" Height="50">
 
-            <Button Name="NutrientsBtn" Width="110" FontSize="20" Margin="10,0,10,0" Click="NutrientsMode_OnClick">
-                Nutrients
+            <Button Name="NutrientsBtn" Width="110"
+                    FontSize="20" Margin="10,0,10,0"
+                    Click="NutrientsMode_OnClick">
+                    Nutrients
             </Button>
 
-            <Button Name="RecipeBtn" Width="110" HorizontalContentAlignment="Center" FontSize="20" Margin="10,0,10,0" Click="RecipeBtn_OnClick">
-                <TextBlock Text="Recipes"></TextBlock>
+            <Button Name="RecipeBtn" Width="110"
+                    HorizontalContentAlignment="Center"
+                    FontSize="20" Margin="10,0,10,0"
+                    Click="RecipeBtn_OnClick">
+                    Recipes
             </Button>
+            
         </StackPanel>
-       
         
         <!-- Поле для ввода -->
-        <TextBox Name="TBox" Grid.Column="2" Grid.Row="3" Width="300"/>
+        <TextBox Name="TBox" Grid.Column="2" Grid.Row="3" Text="{Binding UserInput}" Width="300" TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True"/>
+        
+        <!-- Окно вывода --> 
+        <StackPanel Grid.Row="4" Grid.Column="2" VerticalAlignment="Center">
+            <TextBlock Name="TBlock" Background="LightGray" IsVisible="False" Text="{Binding TestMessage}"/>  
+        </StackPanel>
         
         <!--  Поиск  -->
         <StackPanel Grid.Column="2" Grid.Row="5">
-            <Button Background="Black" HorizontalAlignment="Center" FontSize="40">Search</Button>
+            <Button 
+                Name="SearchBtn"
+                Background="Black"
+                HorizontalAlignment="Center" 
+                FontSize="40"
+                Click="SearchBtn_OnClick"
+                Command="{Binding ChangeMessage}"
+                Content="Search">
+                <Button.Flyout>
+                    
+                </Button.Flyout>
+                
+            </Button>
         </StackPanel>
         
     </Grid>
