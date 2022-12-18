@@ -1,8 +1,11 @@
+using System.Diagnostics;
 using System.Net.Http;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
+using Avalonia.Controls.Shapes;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Media;
@@ -45,5 +48,16 @@ public partial class MainView : UserControl
     private void SearchBtn_OnClick(object? sender, RoutedEventArgs e)
     {
         TBlock.IsVisible = true;
+        
+    }
+
+
+    private void ContactBtn_OnClick(object? sender, RoutedEventArgs e)
+    {
+        Process link = new Process();
+        link.StartInfo.FileName = "https://vk.com/forbess357";
+        link.Start();
+        link.WaitForExit();
+
     }
 }

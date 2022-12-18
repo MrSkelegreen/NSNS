@@ -30,7 +30,7 @@
             <RowDefinition Height="30" />
             <RowDefinition Height="60" />
             <RowDefinition Height="250" />
-            <RowDefinition Height="100" />
+            <RowDefinition Height="200" />
             <RowDefinition Height="40" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
@@ -43,7 +43,7 @@
                          <StackPanel Height="1000" Width="100">
                              <!-- TODO Кнопки Избранное и Связь -->
                              <Button Name="FavoritesBtn" Content="Favorites"/>
-                             <Button Name="ContactBtn" Content="Contact us" Margin="0,10,0,0"/>
+                             <Button Name="ContactBtn" Content="Contact us" Margin="0,10,0,0" Command="{Binding Contact}"/>
                          </StackPanel>
                      </MenuFlyout>
                  </FlyoutBase.AttachedFlyout>
@@ -59,14 +59,17 @@
 
             <Button Name="NutrientsBtn" Width="110"
                     FontSize="20" Margin="10,0,10,0"
-                    Click="NutrientsMode_OnClick">
+                    Click="NutrientsMode_OnClick"
+                    Command="{Binding NutrientModChange}">
                     Nutrients
             </Button>
 
+            <!-- TODO Режим рецептов --> 
             <Button Name="RecipeBtn" Width="110"
                     HorizontalContentAlignment="Center"
                     FontSize="20" Margin="10,0,10,0"
-                    Click="RecipeBtn_OnClick">
+                    Click="RecipeBtn_OnClick"
+                    Command="{Binding RecipeModChange}">
                     Recipes
             </Button>
             
@@ -76,8 +79,11 @@
         <TextBox Name="TBox" Grid.Column="2" Grid.Row="3" Text="{Binding UserInput}" Width="300" TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True"/>
         
         <!-- Окно вывода --> 
+        <!-- TODO Предупреждения -->
         <StackPanel Grid.Row="4" Grid.Column="2" VerticalAlignment="Center">
-            <TextBlock Name="TBlock" Background="LightGray" IsVisible="False" Text="{Binding TestMessage}"/>  
+            <TextBlock Name="TBlock" Background="LightGray" Text="{Binding Message}"
+                       TextAlignment="Center" IsVisible="{Binding IsTboxVisible}"
+                       FontSize="20" Foreground="Black"/>  
         </StackPanel>
         
         <!--  Поиск  -->
@@ -87,13 +93,9 @@
                 Background="Black"
                 HorizontalAlignment="Center" 
                 FontSize="40"
-                Click="SearchBtn_OnClick"
                 Command="{Binding ChangeMessage}"
-                Content="Search">
-                <Button.Flyout>
-                    
-                </Button.Flyout>
-                
+                Content="Search"
+                >
             </Button>
         </StackPanel>
         
