@@ -14,7 +14,7 @@
         <viewModels:MainViewModel />
     </Design.DataContext>
     
-    <Grid Background="White" ShowGridLines="True">
+    <Grid Background="White">
         
         <!-- Разметка -->
         <Grid.ColumnDefinitions>

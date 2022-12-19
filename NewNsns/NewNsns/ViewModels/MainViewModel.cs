@@ -14,6 +14,7 @@ using Avalonia.Input;
 using NewNsns.Views;
 using Newtonsoft.Json;
 using Avalonia.ReactiveUI;
+using Xunit;
 
 
 namespace NewNsns.ViewModels;
@@ -30,19 +31,30 @@ public class MainViewModel : INotifyPropertyChanged
     //TODO Загрузочный бар
     public async void ChangeMessage()
     {
-        if (NutrientMode)
+        try
         {
-            if (UserInput == null) return;
-            await HttpTest(UserInput);
-            Message = httpResponse;
-            IsTboxVisible = true;
-            
+            if (NutrientMode)
+            {
+                if (UserInput == null) return;
+                
+                await HttpTest(UserInput);
+                
+                Message = httpResponse;
+                IsTboxVisible = true;
+                
+            }
+            else
+            {
+                IsTboxVisible = true;
+                Message = "Coming soon!";
+            }
         }
-        else
+        catch
         {
             IsTboxVisible = true;
-            Message = "Coming soon!";
+            Message = "Error! Try Again :(";
         }
+        
     }
     
     public void NutrientModChange()
