@@ -18,7 +18,7 @@
         
         <!-- Разметка -->
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
@@ -33,16 +33,19 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         
+        <StackPanel Grid.ColumnSpan="3" Grid.RowSpan="7" Background="HoneyDew"/>
+        
         <!-- Поле для ввода -->
         <TextBox Name="TBox" Grid.Column="1" Grid.Row="3" Text="{Binding UserInput}"
                  Width="300" TextWrapping="Wrap"
-                 AcceptsReturn="True" AcceptsTab="True"/>
+                 AcceptsReturn="True" AcceptsTab="True"
+                 />
         
         <!-- Окно вывода --> 
         
         <StackPanel Grid.Row="4" Grid.Column="1" VerticalAlignment="Center">
             <TextBlock Name="TBlock" Background="LightGray" Text="{Binding Message}"
-                       TextAlignment="Center" IsVisible="{Binding IsTboxVisible}"
+                       TextAlignment="Center"
                        FontSize="20" Foreground="Black"/>  
         </StackPanel>
         

@@ -12,7 +12,6 @@ public partial class MainView : UserControl
 
         DataContext = new MainViewModel();
     }
-    static readonly HttpClient Client = new HttpClient();
 
     //Кнопка поиска
     private void SearchBtn_OnClick(object? sender, RoutedEventArgs e)

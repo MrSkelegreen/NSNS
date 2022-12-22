@@ -5,6 +5,7 @@
       <map>
         <entry key="NewNsns/NewNsns/App.axaml" value="NewNsns/NewNsns.Desktop/NewNsns.Desktop.csproj" />
         <entry key="NewNsns/NewNsns/Views/MainView.axaml" value="NewNsns/NewNsns.Desktop/NewNsns.Desktop.csproj" />
+        <entry key="NewNsns/NewNsns/Views/MainWindow.axaml" value="NewNsns/NewNsns.Desktop/NewNsns.Desktop.csproj" />
         <entry key="NewNsns/NewNsns/Views/RecipeWindow.axaml" value="NewNsns/NewNsns.Desktop/NewNsns.Desktop.csproj" />
       </map>
     </option>

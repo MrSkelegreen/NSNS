@@ -1,21 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.Diagnostics;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using System.Windows.Input;
-using Avalonia;
-using Avalonia.Controls.ApplicationLifetimes;
-using Avalonia.Controls.Shapes;
-using Avalonia.Input;
-using NewNsns.Views;
 using Newtonsoft.Json;
-using Avalonia.ReactiveUI;
-using Xunit;
-
 
 namespace NewNsns.ViewModels;
 
@@ -28,53 +18,23 @@ public class MainViewModel : INotifyPropertyChanged
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
     
-    //TODO Загрузочный бар
-    public async void ChangeMessage()
+    public virtual async void ChangeMessage()
     {
-        try
+        if (UserInput == null)
         {
-            if (NutrientMode)
-            {
-                if (UserInput == null) return;
-                
-                await HttpTest(UserInput);
-                
-                Message = httpResponse;
-                IsTboxVisible = true;
-                
-            }
-            else
-            {
-                IsTboxVisible = true;
-                Message = "Coming soon!";
-            }
+            Message = "Field is empty.\n" +
+                      "Type something like: 200 g chicken";
         }
-        catch
+        else
         {
-            IsTboxVisible = true;
-            Message = "Error! Try Again :(";
-        }
-        
-    }
-    
-    public void NutrientModChange()
-    {
-        if (!NutrientMode)
-        {
-            RecipeMode = false;
-            NutrientMode = true;
-        }
-    }
-    public void RecipeModChange()
-    {
-        if (!RecipeMode)
-        {
-            NutrientMode = false;
-            RecipeMode = true;
+            await HttpTest(UserInput);
+            Message = httpResponse;
         }
     }
 
-    private static string httpResponse;
+    
+    
+    protected static string httpResponse;
     
     private  string _userInput;
 
@@ -97,57 +57,25 @@ public class MainViewModel : INotifyPropertyChanged
             _message = value;
             OnPropertyChanged();
         }
+         
     }
-    
-    private bool _isTboxVisible;
-    public bool IsTboxVisible
-    {
-        get => _isTboxVisible;
-        set
-        {
-            _isTboxVisible = value;
-            OnPropertyChanged();
-        }
-    }
-    
-    private bool _nutrientMode = true;
 
-    public bool NutrientMode
-    {
-        get => _nutrientMode;
-        set
-        {
-            _nutrientMode = value;
-            OnPropertyChanged();
-        } 
-    }
-    private bool _recipeMode = false;
-
-    public bool RecipeMode
-    {
-        get => _recipeMode;
-        set
-        {
-            _recipeMode = value;
-            OnPropertyChanged();
-        } 
-    }
-    
-    class Food
+    public class Food
     {
         public  string Calories { get; set; }
-        
-        public  string TotalWeight { get; set; }
-        
         public TotalNutrients TotalNutrients { get; set; }
-        
-        public override string ToString()
+
+        /*public override bool Equals(object other)
         {
-            return $"{Calories}: {TotalWeight}";
-        }
+            var toCompareWith = other as Food;
+            if (toCompareWith == null)
+                return false;
+            return this.Calories == toCompareWith.Calories &&
+                   this.TotalNutrients == toCompareWith.TotalNutrients;
+        }*/
     }
 
-    class TotalNutrients
+    public class TotalNutrients
     {
         public Fat Fat { get; set; }
         public Sugar Sugar { get; set; }
@@ -168,70 +96,72 @@ public class MainViewModel : INotifyPropertyChanged
         public Iron Iron { get; set; }
     }
 
-    class Fat
+    public class Fat
     {
         public string Quantity { get; set; }
     }
 
-    class Sugar
+    public class Sugar
     {
         public string Quantity { get; set; }
     }
 
-    class Cholesterol
+   public class Cholesterol
     {
         public string Quantity { get; set; }
     }
 
-    class Sodium
+    public class Sodium
     {
         public string Quantity { get; set; }
     }
 
-    class Protein
+   public  class Protein
     {
         public string Quantity { get; set; }
     }
 
-    class Carbohydrate
+    public class Carbohydrate
     {
         public string Quantity { get; set; }
     }
 
-    class Iron
+    public class Iron
     {
         public string Quantity { get; set; }
     }
     
-    static async Task HttpTest(string userInput)
+    protected virtual async Task HttpTest(string userInput)
     {
-        //Зачеем меня призвали?
         using var client = new HttpClient();
 
         client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            var url = "https://api.edamam.com/api/nutrition-data?app_id=2be3daa4&app_key=dc6727a9535ff25838f65828408be9c8" +
+            string url = "https://api.edamam.com/api/nutrition-data?app_id=2be3daa4&app_key=dc6727a9535ff25838f65828408be9c8" +
                       "&nutrition-type=cooking" +
                       $"&ingr={userInput}";
-            HttpResponseMessage response = await client.GetAsync(url);
-            response.EnsureSuccessStatusCode();
-            var resp = await response.Content.ReadAsStringAsync();
-            Food food = JsonConvert.DeserializeObject<Food>(resp);
-        
-            httpResponse = $"Calories: {food.Calories} kcal" +
-                           $"\nFat: {food.TotalNutrients.Fat.Quantity} g" +
-                           $"\nSugar: {food.TotalNutrients.Sugar.Quantity} g" +
-                           $"\nCholesterol: {food.TotalNutrients.Cholesterol.Quantity} mg" +
-                           $"\nSodium: {food.TotalNutrients.Sodium.Quantity} mg" +
-                           $"\nProtein: {food.TotalNutrients.Protein.Quantity} g" +
-                           $"\nCarbohydrate: {food.TotalNutrients.Carbohydrate.Quantity} g" +
-                           $"\nIron: {food.TotalNutrients.Iron.Quantity} mg";
-    }
+            try
+            {
+                HttpResponseMessage response = await client.GetAsync(url);
+                response.EnsureSuccessStatusCode();
+                var resp = await response.Content.ReadAsStringAsync();
+                Food food = JsonConvert.DeserializeObject<Food>(resp);
 
-    public ICommand OpenWebCommand { get; }
-    
-    public async void Contact()
-    {
-        
+                httpResponse = $"Calories: {food.Calories} kcal" +
+                               $"\nFat: {food.TotalNutrients.Fat.Quantity} g" +
+                               $"\nSugar: {food.TotalNutrients.Sugar.Quantity} g" +
+                               $"\nCholesterol: {food.TotalNutrients.Cholesterol.Quantity} mg" +
+                               $"\nSodium: {food.TotalNutrients.Sodium.Quantity} mg" +
+                               $"\nProtein: {food.TotalNutrients.Protein.Quantity} g" +
+                               $"\nCarbohydrate: {food.TotalNutrients.Carbohydrate.Quantity} g" +
+                               $"\nIron: {food.TotalNutrients.Iron.Quantity} mg";
+            }
+            catch
+            {
+                httpResponse = "Error! :(\n" +
+                               "Try something like: 200 g chicken";
+            }
+
+           
     }
     
 }
