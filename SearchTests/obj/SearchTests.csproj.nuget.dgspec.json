@@ -1,0 +1,174 @@
+{
+  "format": 1,
+  "restore": {
+    "N:\\DZ\\UIFIS_TIS\\Kursach\\CourseProject\\NSNS\\SearchTests\\SearchTests.csproj": {}
+  },
+  "projects": {
+    "N:\\DZ\\UIFIS_TIS\\Kursach\\CourseProject\\NSNS\\NewNsns\\NewNsns\\NewNsns.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "N:\\DZ\\UIFIS_TIS\\Kursach\\CourseProject\\NSNS\\NewNsns\\NewNsns\\NewNsns.csproj",
+        "projectName": "NewNsns",
+        "projectPath": "N:\\DZ\\UIFIS_TIS\\Kursach\\CourseProject\\NSNS\\NewNsns\\NewNsns\\NewNsns.csproj",
+        "packagesPath": "C:\\Users\\XE\\.nuget\\packages\\",
+        "outputPath": "N:\\DZ\\UIFIS_TIS\\Kursach\\CourseProject\\NSNS\\NewNsns\\NewNsns\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\XE\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Avalonia": {
+              "target": "Package",
+              "version": "[11.0.0-preview4, )"
+            },
+            "Avalonia.Diagnostics": {
+              "target": "Package",
+              "version": "[11.0.0-preview4, )"
+            },
+            "Avalonia.ReactiveUI": {
+              "target": "Package",
+              "version": "[11.0.0-preview4, )"
+            },
+            "Avalonia.Themes.Fluent": {
+              "target": "Package",
+              "version": "[11.0.0-preview4, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.2, )"
+            },
+            "Nito.AsyncEx": {
+              "target": "Package",
+              "version": "[3.0.1, )"
+            },
+            "ReactiveUI": {
+              "target": "Package",
+              "version": "[18.4.1, )"
+            },
+            "XamlNameReferenceGenerator": {
+              "target": "Package",
+              "version": "[1.4.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.404\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "N:\\DZ\\UIFIS_TIS\\Kursach\\CourseProject\\NSNS\\SearchTests\\SearchTests.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "N:\\DZ\\UIFIS_TIS\\Kursach\\CourseProject\\NSNS\\SearchTests\\SearchTests.csproj",
+        "projectName": "SearchTests",
+        "projectPath": "N:\\DZ\\UIFIS_TIS\\Kursach\\CourseProject\\NSNS\\SearchTests\\SearchTests.csproj",
+        "packagesPath": "C:\\Users\\XE\\.nuget\\packages\\",
+        "outputPath": "N:\\DZ\\UIFIS_TIS\\Kursach\\CourseProject\\NSNS\\SearchTests\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\XE\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "N:\\DZ\\UIFIS_TIS\\Kursach\\CourseProject\\NSNS\\NewNsns\\NewNsns\\NewNsns.csproj": {
+                "projectPath": "N:\\DZ\\UIFIS_TIS\\Kursach\\CourseProject\\NSNS\\NewNsns\\NewNsns\\NewNsns.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "MSTest.TestAdapter": {
+              "target": "Package",
+              "version": "[2.2.8, )"
+            },
+            "MSTest.TestFramework": {
+              "target": "Package",
+              "version": "[2.2.8, )"
+            },
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[17.1.0, )"
+            },
+            "coverlet.collector": {
+              "target": "Package",
+              "version": "[3.1.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.404\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

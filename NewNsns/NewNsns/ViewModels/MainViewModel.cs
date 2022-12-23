@@ -18,6 +18,7 @@ public class MainViewModel : INotifyPropertyChanged
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
     
+    //Метод меняет сообщение на экране
     public virtual async void ChangeMessage()
     {
         if (UserInput == null)
@@ -31,11 +32,10 @@ public class MainViewModel : INotifyPropertyChanged
             Message = httpResponse;
         }
     }
-
-    
-    
+    //В эту переменную помещается json ответ
     protected static string httpResponse;
     
+    //В эту переменную помещается пользовательский ввод
     private  string _userInput;
 
     public string UserInput
@@ -48,6 +48,7 @@ public class MainViewModel : INotifyPropertyChanged
         }
     }
 
+    //Сообщение для вывода на экран
     private string _message;
     public string Message
     {
@@ -60,19 +61,12 @@ public class MainViewModel : INotifyPropertyChanged
          
     }
 
+    //Класс для парсинга json ответа
     public class Food
     {
         public  string Calories { get; set; }
         public TotalNutrients TotalNutrients { get; set; }
-
-        /*public override bool Equals(object other)
-        {
-            var toCompareWith = other as Food;
-            if (toCompareWith == null)
-                return false;
-            return this.Calories == toCompareWith.Calories &&
-                   this.TotalNutrients == toCompareWith.TotalNutrients;
-        }*/
+        
     }
 
     public class TotalNutrients
@@ -130,20 +124,26 @@ public class MainViewModel : INotifyPropertyChanged
     {
         public string Quantity { get; set; }
     }
-    
-    protected virtual async Task HttpTest(string userInput)
-    {
-        using var client = new HttpClient();
 
+    //Метод для получения json ответа и его парсинга
+    private async Task HttpTest(string userInput)
+    {
+        //Вызов http клиента
+        using var client = new HttpClient();
+        
+        //Ссылка на запрос с пользовательским вводом в виде параметра &ingr
         client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             string url = "https://api.edamam.com/api/nutrition-data?app_id=2be3daa4&app_key=dc6727a9535ff25838f65828408be9c8" +
                       "&nutrition-type=cooking" +
                       $"&ingr={userInput}";
             try
             {
+                //Отправка запроса
                 HttpResponseMessage response = await client.GetAsync(url);
                 response.EnsureSuccessStatusCode();
                 var resp = await response.Content.ReadAsStringAsync();
+                
+                //Парсинг json ответа
                 Food food = JsonConvert.DeserializeObject<Food>(resp);
 
                 httpResponse = $"Calories: {food.Calories} kcal" +
@@ -160,8 +160,5 @@ public class MainViewModel : INotifyPropertyChanged
                 httpResponse = "Error! :(\n" +
                                "Try something like: 200 g chicken";
             }
-
-           
     }
-    
 }

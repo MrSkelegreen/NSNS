@@ -38,8 +38,7 @@
         <!-- Поле для ввода -->
         <TextBox Name="TBox" Grid.Column="1" Grid.Row="3" Text="{Binding UserInput}"
                  Width="300" TextWrapping="Wrap"
-                 AcceptsReturn="True" AcceptsTab="True"
-                 />
+                 AcceptsReturn="True" AcceptsTab="True"/>
         
         <!-- Окно вывода --> 
         
