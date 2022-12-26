@@ -8,7 +8,6 @@
     ".NETCoreApp,Version=v6.0": {
       "SearchTests/1.0.0": {
         "dependencies": {
-          "AsyncImageLoader.Avalonia": "2.4.0",
           "MSTest.TestAdapter": "2.2.8",
           "MSTest.TestFramework": "2.2.8",
           "Microsoft.NET.Test.Sdk": "17.1.0",
@@ -17,17 +16,6 @@
         },
         "runtime": {
           "SearchTests.dll": {}
-        }
-      },
-      "AsyncImageLoader.Avalonia/2.4.0": {
-        "dependencies": {
-          "Avalonia": "11.0.0-preview4"
-        },
-        "runtime": {
-          "lib/netstandard2.1/AsyncImageLoader.Avalonia.dll": {
-            "assemblyVersion": "2.4.0.0",
-            "fileVersion": "2.4.0.0"
-          }
         }
       },
       "Avalonia/11.0.0-preview4": {
@@ -1496,66 +1484,8 @@
         }
       },
       "XamlNameReferenceGenerator/1.4.2": {},
-      "xunit/2.4.2": {
-        "dependencies": {
-          "xunit.analyzers": "1.0.0",
-          "xunit.assert": "2.4.2",
-          "xunit.core": "2.4.2"
-        }
-      },
-      "xunit.abstractions/2.0.3": {
-        "runtime": {
-          "lib/netstandard2.0/xunit.abstractions.dll": {
-            "assemblyVersion": "2.0.0.0",
-            "fileVersion": "2.0.0.0"
-          }
-        }
-      },
-      "xunit.analyzers/1.0.0": {},
-      "xunit.assert/2.4.2": {
-        "dependencies": {
-          "NETStandard.Library": "1.6.1"
-        },
-        "runtime": {
-          "lib/netstandard1.1/xunit.assert.dll": {
-            "assemblyVersion": "2.4.2.0",
-            "fileVersion": "2.4.2.0"
-          }
-        }
-      },
-      "xunit.core/2.4.2": {
-        "dependencies": {
-          "xunit.extensibility.core": "2.4.2",
-          "xunit.extensibility.execution": "2.4.2"
-        }
-      },
-      "xunit.extensibility.core/2.4.2": {
-        "dependencies": {
-          "NETStandard.Library": "1.6.1",
-          "xunit.abstractions": "2.0.3"
-        },
-        "runtime": {
-          "lib/netstandard1.1/xunit.core.dll": {
-            "assemblyVersion": "2.4.2.0",
-            "fileVersion": "2.4.2.0"
-          }
-        }
-      },
-      "xunit.extensibility.execution/2.4.2": {
-        "dependencies": {
-          "NETStandard.Library": "1.6.1",
-          "xunit.extensibility.core": "2.4.2"
-        },
-        "runtime": {
-          "lib/netstandard1.1/xunit.execution.dotnet.dll": {
-            "assemblyVersion": "2.4.2.0",
-            "fileVersion": "2.4.2.0"
-          }
-        }
-      },
       "NewNsns/1.0.0": {
         "dependencies": {
-          "AsyncImageLoader.Avalonia": "2.4.0",
           "Avalonia": "11.0.0-preview4",
           "Avalonia.Diagnostics": "11.0.0-preview4",
           "Avalonia.ReactiveUI": "11.0.0-preview4",
@@ -1563,8 +1493,7 @@
           "Newtonsoft.Json": "13.0.2",
           "Nito.AsyncEx": "3.0.1",
           "ReactiveUI": "18.4.1",
-          "XamlNameReferenceGenerator": "1.4.2",
-          "xunit": "2.4.2"
+          "XamlNameReferenceGenerator": "1.4.2"
         },
         "runtime": {
           "NewNsns.dll": {}
@@ -1577,13 +1506,6 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
-    },
-    "AsyncImageLoader.Avalonia/2.4.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-tXIf9DXKO3TPcKep/ei85Ua6KJ44LiAGrMBNtfrkildALpP82Gz3oXdOI5ykZqB8Ciil6ls+0eQEY1Gl5eJ9ng==",
-      "path": "asyncimageloader.avalonia/2.4.0",
-      "hashPath": "asyncimageloader.avalonia.2.4.0.nupkg.sha512"
     },
     "Avalonia/11.0.0-preview4": {
       "type": "package",
@@ -2382,55 +2304,6 @@
       "sha512": "sha512-mmcZspsg89fgELhoPqzZ3RUd2srVoVGwaopY6ewaWIQH7d3UIAW+HW1FoGegV/U3rjYlA+wvYXjWKyLrd9hqjw==",
       "path": "xamlnamereferencegenerator/1.4.2",
       "hashPath": "xamlnamereferencegenerator.1.4.2.nupkg.sha512"
-    },
-    "xunit/2.4.2": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-6Mj73Ont3zj2CJuoykVJfE0ZmRwn7C+pTuRP8c4bnaaTFjwNG6tGe0prJ1yIbMe9AHrpDys63ctWacSsFJWK/w==",
-      "path": "xunit/2.4.2",
-      "hashPath": "xunit.2.4.2.nupkg.sha512"
-    },
-    "xunit.abstractions/2.0.3": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-pot1I4YOxlWjIb5jmwvvQNbTrZ3lJQ+jUGkGjWE3hEFM0l5gOnBWS+H3qsex68s5cO52g+44vpGzhAt+42vwKg==",
-      "path": "xunit.abstractions/2.0.3",
-      "hashPath": "xunit.abstractions.2.0.3.nupkg.sha512"
-    },
-    "xunit.analyzers/1.0.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-BeO8hEgs/c8Ls2647fPfieMngncvf0D0xYNDfIO59MolxtCtVjFRd6SRc+7tj8VMqkVOuJcnc9eh4ngI2cAmLQ==",
-      "path": "xunit.analyzers/1.0.0",
-      "hashPath": "xunit.analyzers.1.0.0.nupkg.sha512"
-    },
-    "xunit.assert/2.4.2": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-pxJISOFjn2XTTi1mcDCkRZrTFb9OtRRCtx2kZFNF51GdReLr1ls2rnyxvAS4JO247K3aNtflvh5Q0346K5BROA==",
-      "path": "xunit.assert/2.4.2",
-      "hashPath": "xunit.assert.2.4.2.nupkg.sha512"
-    },
-    "xunit.core/2.4.2": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-KB4yGCxNqIVyekhJLXtKSEq6BaXVp/JO3mbGVE1hxypZTLEe7h+sTbAhpA+yZW2dPtXTuiW+C1B2oxxHEkrmOw==",
-      "path": "xunit.core/2.4.2",
-      "hashPath": "xunit.core.2.4.2.nupkg.sha512"
-    },
-    "xunit.extensibility.core/2.4.2": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-W1BoXTIN1C6kpVSMw25huSet25ky6IAQUNovu3zGOGN/jWnbgSoTyCrlIhmXSg0tH5nEf8q7h3OjNHOjyu5PfA==",
-      "path": "xunit.extensibility.core/2.4.2",
-      "hashPath": "xunit.extensibility.core.2.4.2.nupkg.sha512"
-    },
-    "xunit.extensibility.execution/2.4.2": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-CZmgcKkwpyo8FlupZdWpJCryrAOWLh1FBPG6gmVZuPQkGQsim/oL4PcP4nfrC2hHgXUFtluvaJ0Sp9PQKUMNpg==",
-      "path": "xunit.extensibility.execution/2.4.2",
-      "hashPath": "xunit.extensibility.execution.2.4.2.nupkg.sha512"
     },
     "NewNsns/1.0.0": {
       "type": "project",

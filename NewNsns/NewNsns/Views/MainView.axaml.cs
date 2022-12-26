@@ -12,12 +12,4 @@ public partial class MainView : UserControl
 
         DataContext = new MainViewModel();
     }
-
-    //Кнопка поиска
-    private void SearchBtn_OnClick(object? sender, RoutedEventArgs e)
-    {
-        TBlock.IsVisible = true;
-        
-    }
-    
 }

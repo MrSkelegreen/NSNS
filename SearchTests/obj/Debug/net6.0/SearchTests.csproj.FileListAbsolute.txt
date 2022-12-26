@@ -50,10 +50,6 @@ N:\DZ\UIFIS_TIS\Kursach\CourseProject\NSNS\SearchTests\bin\Debug\net6.0\NuGet.Fr
 N:\DZ\UIFIS_TIS\Kursach\CourseProject\NSNS\SearchTests\bin\Debug\net6.0\ReactiveUI.dll
 N:\DZ\UIFIS_TIS\Kursach\CourseProject\NSNS\SearchTests\bin\Debug\net6.0\Splat.dll
 N:\DZ\UIFIS_TIS\Kursach\CourseProject\NSNS\SearchTests\bin\Debug\net6.0\System.Reactive.dll
-N:\DZ\UIFIS_TIS\Kursach\CourseProject\NSNS\SearchTests\bin\Debug\net6.0\xunit.abstractions.dll
-N:\DZ\UIFIS_TIS\Kursach\CourseProject\NSNS\SearchTests\bin\Debug\net6.0\xunit.assert.dll
-N:\DZ\UIFIS_TIS\Kursach\CourseProject\NSNS\SearchTests\bin\Debug\net6.0\xunit.core.dll
-N:\DZ\UIFIS_TIS\Kursach\CourseProject\NSNS\SearchTests\bin\Debug\net6.0\xunit.execution.dotnet.dll
 N:\DZ\UIFIS_TIS\Kursach\CourseProject\NSNS\SearchTests\bin\Debug\net6.0\cs\Microsoft.CodeAnalysis.resources.dll
 N:\DZ\UIFIS_TIS\Kursach\CourseProject\NSNS\SearchTests\bin\Debug\net6.0\de\Microsoft.CodeAnalysis.resources.dll
 N:\DZ\UIFIS_TIS\Kursach\CourseProject\NSNS\SearchTests\bin\Debug\net6.0\es\Microsoft.CodeAnalysis.resources.dll
@@ -184,4 +180,3 @@ N:\DZ\UIFIS_TIS\Kursach\CourseProject\NSNS\SearchTests\obj\Debug\net6.0\refint\S
 N:\DZ\UIFIS_TIS\Kursach\CourseProject\NSNS\SearchTests\obj\Debug\net6.0\SearchTests.pdb
 N:\DZ\UIFIS_TIS\Kursach\CourseProject\NSNS\SearchTests\obj\Debug\net6.0\SearchTests.genruntimeconfig.cache
 N:\DZ\UIFIS_TIS\Kursach\CourseProject\NSNS\SearchTests\obj\Debug\net6.0\ref\SearchTests.dll
-N:\DZ\UIFIS_TIS\Kursach\CourseProject\NSNS\SearchTests\bin\Debug\net6.0\AsyncImageLoader.Avalonia.dll
