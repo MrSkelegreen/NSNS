@@ -1,7 +1,7 @@
 <UserControl
     Background="#171C2C"
     Foreground="White"
-    d:DesignHeight="600"
+    d:DesignHeight="700"
     d:DesignWidth="400"
     mc:Ignorable="d"
     x:Class="NewNsns.Views.MainView"
@@ -9,19 +9,22 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="clr-namespace:NewNsns.ViewModels"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:uc="clr-namespace:NewNsns.Views"
+    xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
+    xmlns:visuals='Avalonia.Visuals, Version=0.10.0.0, Culture=neutral, PublicKeyToken=c8d484a7012f9a8b'>
+    
     <Design.DataContext>
         <viewModels:MainViewModel />
     </Design.DataContext>
     
-    <Grid Background="White">
+    <Grid Name="Grid" Background="HoneyDew" ShowGridLines="False">
         
         <!-- Разметка -->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="35" />
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="Auto"/>
-            
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
@@ -30,75 +33,112 @@
             <RowDefinition Height="30" />
             <RowDefinition Height="60" />
             <RowDefinition Height="250" />
-            <RowDefinition Height="200" />
-            <RowDefinition Height="40" />
+            <RowDefinition Height="*" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
+        
+        
 
         <!--  Боковая панель  -->
-        <StackPanel Background="LightGray" Grid.RowSpan="7" Orientation="Vertical">
-            <Image Name="SettingsBtn" Source="../Assets/cog.png" Tapped="SettingsBtn_OnTapped">
+        <StackPanel Background="LightGray" Grid.RowSpan="8" Orientation="Vertical">
+            <Image Name="SettingsBtn" Source="../Assets/cog.png"
+                   Tapped="SettingsBtn_OnTapped">
                  <FlyoutBase.AttachedFlyout>
                      <MenuFlyout>
                          <StackPanel Height="1000" Width="100">
                              <!-- TODO Кнопки Избранное и Связь -->
                              <Button Name="FavoritesBtn" Content="Favorites"/>
                              <Button Name="ContactBtn" Content="Contact us" Margin="0,10,0,0" Command="{Binding Contact}"/>
+                             
                          </StackPanel>
                      </MenuFlyout>
                  </FlyoutBase.AttachedFlyout>
             </Image>
         </StackPanel>
 
+        <!--  TODO Картинки на фон  -->
         <!--  Выбор режима  -->
+        <Border Grid.Row="1" Grid.Column="2" BorderThickness="5" BorderBrush="Gray" CornerRadius="15" Height="50" Width="260"/>
+        
         <StackPanel
-            Background="LightGray"
             Grid.Column="2"
             Grid.Row="1"
             Orientation="Horizontal" Width="260" Height="50">
 
-            <Button Name="NutrientsBtn" Width="110"
+            <Button Name="NutrientsBtn" Width="110" CornerRadius="15"
                     FontSize="20" Margin="10,0,10,0"
                     Click="NutrientsMode_OnClick"
                     Command="{Binding NutrientModChange}">
-                    Nutrients
+                Nutrients
             </Button>
 
             <!-- TODO Режим рецептов --> 
-            <Button Name="RecipeBtn" Width="110"
+            <Button Name="RecipeBtn" Width="110" CornerRadius="15" Background="LightGray"
                     HorizontalContentAlignment="Center"
                     FontSize="20" Margin="10,0,10,0"
                     Click="RecipeBtn_OnClick"
                     Command="{Binding RecipeModChange}">
-                    Recipes
+                Recipes
             </Button>
             
         </StackPanel>
         
         <!-- Поле для ввода -->
-        <TextBox Name="TBox" Grid.Column="2" Grid.Row="3" Text="{Binding UserInput}" Width="300" TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True"/>
+        <!--TODO Поменять маску для режима рецептов -->
+        <TextBox Name="TBox" Grid.Column="2" Grid.Row="3" Width="300" Height="50" Watermark="Type something like: 200 g chicken"
+                 FontSize="16" TextAlignment="Center" VerticalContentAlignment="Center" CornerRadius="15"/>
+        
+        <ProgressBar Grid.Column="2" Grid.Row="5" VerticalAlignment="Top" Name="PrBar" 
+                     Background="LightGray" Height="20"
+                     IsVisible="{Binding IsPrBarVisible}"
+                     IsIndeterminate="True"
+                     Margin="0,10,0,0">
+            
+            <ProgressBar.Foreground>
+                <LinearGradientBrush>
+                    <GradientStop Color = "Green"/> 
+                    <GradientStop Color = "LightGreen"/>
+                </LinearGradientBrush>
+            </ProgressBar.Foreground>
+        </ProgressBar>
         
         <!-- Окно вывода --> 
         <!-- TODO Предупреждения -->
+        <!-- TODO Анимацию вывода сообщений об ошибках -->
         <StackPanel Grid.Row="4" Grid.Column="2" VerticalAlignment="Center">
             <TextBlock Name="TBlock" Background="LightGray" Text="{Binding Message}"
                        TextAlignment="Center" IsVisible="{Binding IsTboxVisible}"
-                       FontSize="20" Foreground="Black"/>  
+                       FontSize="20" Foreground="Black" VerticalAlignment="Center"/>  
         </StackPanel>
         
         <!--  Поиск  -->
-        <StackPanel Grid.Column="2" Grid.Row="5">
-            <Button 
+        <Button Grid.Column="2" Grid.Row="5"
+                CornerRadius="15"
                 Name="SearchBtn"
                 Background="Black"
                 HorizontalAlignment="Center" 
                 FontSize="40"
-                Command="{Binding ChangeMessage}"
+                Command="{Binding GetUserInput}"
+                CommandParameter="{Binding ElementName=TBox, Path = Text}"
                 Content="Search"
-                >
-            </Button>
-        </StackPanel>
+                Click="SearchBtn_OnClick">
+        </Button>
+        
+        <ListBox IsVisible="{Binding }" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Name="ListBox" 
+                 Items="{Binding Recipes}" HorizontalAlignment="Center" VerticalAlignment="Center"
+                 AutoScrollToSelectedItem="False">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Image asyncImageLoader:ImageLoader.Source="{Binding recipe.image}" Width="300" Height="140"/>
+                        <TextBlock Text="{Binding recipe.Title}" Width="300" Height="140"/>    
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
         
     </Grid>
 
 </UserControl>
+
+
