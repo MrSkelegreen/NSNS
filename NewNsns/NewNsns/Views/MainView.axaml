@@ -36,8 +36,6 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        
-        
 
         <!--  Боковая панель  -->
         <StackPanel Background="LightGray" Grid.RowSpan="8" Orientation="Vertical">
@@ -48,7 +46,7 @@
                          <StackPanel Height="1000" Width="100">
                              <!-- TODO Кнопки Избранное и Связь -->
                              <Button Name="FavoritesBtn" Content="Favorites"/>
-                             <Button Name="ContactBtn" Content="Contact us" Margin="0,10,0,0" Command="{Binding Contact}"/>
+                             <Button Name="ContactBtn" Content="Contact us" Margin="0,10,0,0" Command="{Binding ContactCommand}"/>
                              
                          </StackPanel>
                      </MenuFlyout>
@@ -67,6 +65,7 @@
 
             <Button Name="NutrientsBtn" Width="110" CornerRadius="15"
                     FontSize="20" Margin="10,0,10,0"
+                    HorizontalContentAlignment="Center"
                     Click="NutrientsMode_OnClick"
                     Command="{Binding NutrientModChange}">
                 Nutrients
@@ -84,7 +83,6 @@
         </StackPanel>
         
         <!-- Поле для ввода -->
-        <!--TODO Поменять маску для режима рецептов -->
         <TextBox Name="TBox" Grid.Column="2" Grid.Row="3" Width="300" Height="50" Watermark="Type something like: 200 g chicken"
                  FontSize="16" TextAlignment="Center" VerticalContentAlignment="Center" CornerRadius="15"/>
         
@@ -124,21 +122,73 @@
                 Click="SearchBtn_OnClick">
         </Button>
         
-        <ListBox IsVisible="{Binding }" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Name="ListBox" 
-                 Items="{Binding Recipes}" HorizontalAlignment="Center" VerticalAlignment="Center"
-                 AutoScrollToSelectedItem="False">
+        <Button Name="CloseRecipes" Grid.Column="3" Grid.Row="1" Grid.RowSpan="2"
+                Content="X" Background="Red" Margin="0,0,0,17"
+                Command="{Binding CloseRecipes}" IsVisible="{Binding IsRecipesVisible}"/>
+        
+        <ListBox Name="ListBox" IsVisible="{Binding IsRecipesVisible}" Grid.Row="2" Grid.Column="2" 
+                 Grid.RowSpan="3" Margin="0,20,0,0"
+                 Items="{Binding Recipes}" 
+                 AutoScrollToSelectedItem="False" CornerRadius="15" ScrollViewer.VerticalScrollBarVisibility = "Visible"
+                 ScrollViewer.AllowAutoHide="False">
+            
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Grid>
-                        <Image asyncImageLoader:ImageLoader.Source="{Binding recipe.image}" Width="300" Height="140"/>
-                        <TextBlock Text="{Binding recipe.Title}" Width="300" Height="140"/>    
+                    <Grid ShowGridLines="False">
+                        
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto" MaxHeight="48"/>
+                            <RowDefinition Height="Auto" MaxHeight="48"/>
+                            <RowDefinition Height="100"/>
+                            <RowDefinition Height="Auto" MaxHeight="48"/>
+                        </Grid.RowDefinitions>
+                        
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <Border Grid.Row="4" BorderBrush="Gray" BorderThickness="0,0,0,1" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
+                        
+                        <Image Grid.Row="0" Width="300" Height="140" Grid.ColumnSpan="2"
+                               asyncImageLoader:ImageLoader.Source="{Binding recipe.image}"/>
+                        
+                        <TextBlock Grid.Row="1" Grid.ColumnSpan="2"
+                                   Text="{Binding recipe.Title}" Width="300" TextAlignment="Center" FontSize="20"/>
+                        
+                        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Grid.ColumnSpan="2">
+                            <TextBlock Grid.Row="2" Text="by  " TextAlignment="Center"/>
+                            <TextBlock Grid.Row="2" Text="{Binding recipe.Author}" TextAlignment="Center"/>    
+                        </StackPanel>
+                        
+                        <ListBox Grid.Row="3" Grid.ColumnSpan="2" HorizontalAlignment="Center" Width="260"
+                                 Items="{Binding recipe.ingredientLines}" AutoScrollToSelectedItem="False"
+                                 ScrollViewer.VerticalScrollBarVisibility = "Visible"
+                                 ScrollViewer.AllowAutoHide="False">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding}" HorizontalAlignment="Center" FontSize="10"/>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                        
+                        <StackPanel Grid.Row="4" Orientation="Horizontal">
+                            <TextBlock Text="Calories: "/>
+                            <TextBlock Text="{Binding recipe.calories}" TextAlignment="Left" />
+                        </StackPanel>
+                            
+                        <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,5,0">
+                            <TextBlock Text="Weight: "/>
+                            <TextBlock Text="{Binding recipe.totalWeight}"/>
+                        </StackPanel>
+                        
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        
     </Grid>
-
+    
 </UserControl>
 
 

@@ -20,6 +20,7 @@ public class SplashActivity : AvaloniaSplashActivity<App>
     protected override void OnCreate(Bundle? savedInstanceState)
     {
         base.OnCreate(savedInstanceState);
+        
     }
 
     protected override void OnResume()
@@ -28,4 +29,5 @@ public class SplashActivity : AvaloniaSplashActivity<App>
 
         StartActivity(new Intent(Application.Context, typeof(MainActivity)));
     }
+    
 }

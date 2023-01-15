@@ -1,4 +1,5 @@
-﻿using Avalonia.Media.Imaging;
+﻿using System.Collections.Generic;
+using Avalonia.Media.Imaging;
 using Java.IO;
 using Newtonsoft.Json;
 
@@ -30,7 +31,7 @@ public class Recipe
     public string url { get; set; }
     
     public string[] ingredientLines { get; set; }
-    
+
     public double calories { get; set; }
     
     public double totalWeight { get; set; }

@@ -59,5 +59,9 @@ public partial class MainView : UserControl
     {
         string url = "https://vk.com/forbess357";
     }
-    
+
+    /*private void CloseRecipes_OnClick(object? sender, RoutedEventArgs e)
+    {
+        ListBox.IsVisible = false;
+    }*/
 }
