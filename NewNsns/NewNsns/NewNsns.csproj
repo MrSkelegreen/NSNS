@@ -24,6 +24,7 @@
         <PackageReference Include="NP.Avalonia.Visuals" Version="1.0.33" />
         <PackageReference Include="ReactiveUI" Version="18.4.1" />
         <PackageReference Include="ReactiveUI.Fody" Version="18.4.1" />
+        <PackageReference Include="Xamarin.Plugins.Clipboard" Version="2.3.0" />
         <PackageReference Include="XamlNameReferenceGenerator" Version="1.4.2" />
         <PackageReference Include="xunit" Version="2.4.2" />
     </ItemGroup>

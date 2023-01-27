@@ -10,6 +10,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Net.Mime;
 using System.Reactive.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
@@ -20,15 +21,17 @@ using Android.Content;
 using Android.Graphics.Pdf;
 using Android.Provider;
 using AsyncImageLoader;
+using Avalonia;
+using Avalonia.Controls.Selection;
+using Avalonia.Input;
+using Avalonia.Input.Platform;
 using NewNsns.Classes;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Nito.AsyncEx;
 using ReactiveUI;
 using Process = System.Diagnostics.Process;
-
-
-
+using Plugin.Clipboard;
 
 namespace NewNsns.ViewModels;
 
@@ -42,6 +45,7 @@ public class MainViewModel :  INotifyPropertyChanged, IReactiveObject
         ContactCommand = ReactiveCommand.Create(Contact);
         IsPrBarVisible = false;
         IsRecipesVisible = false;
+        IsSelectedRecipeVisible = false;
 
         string[] rcps = {
             "1 cup long-grain white rice",
@@ -57,10 +61,70 @@ public class MainViewModel :  INotifyPropertyChanged, IReactiveObject
         Hits hit = new Hits(){recipe = recipe};
 
         Recipes = new ObservableCollection<Hits>{};
-        //Ingredients = new List<string> { };
+
         Recipes.Add(hit);
+        
+        Selection = new SelectionModel<Hits>();
+        Selection.SelectionChanged += SelectionChanged;
+    }
+    
+    private Hits _selectedRecipe;
+
+    public Hits SelectedRecipe
+    {
+        get => _selectedRecipe;
+        set
+        {
+            _selectedRecipe = value;
+            OnPropertyChanged();
+        }
+    }
+    
+    public SelectionModel<Hits> Selection { get; }
+    
+    public void SelectionChanged(object sender, SelectionModelSelectionChangedEventArgs e)
+    {
+        IsSelectedRecipeVisible = true;
+        Nutrients = $"Calories: {Math.Round(Selection.SelectedItem.recipe.calories,2)} kcal" +
+                    $"\nFat: {Math.Round(Selection.SelectedItem.recipe.totalNutrients.Fat.Quantity,2)} g" +
+                    $"\nSugar: {Math.Round(Selection.SelectedItem.recipe.totalNutrients.Sugar.Quantity, 2)} g" +
+                    $"\nCholesterol: {Math.Round(Selection.SelectedItem.recipe.totalNutrients.Cholesterol.Quantity,2)} mg" +
+                    $"\nSodium: {Math.Round(Selection.SelectedItem.recipe.totalNutrients.Sodium.Quantity,2)} mg" +
+                    $"\nProtein: {Math.Round(Selection.SelectedItem.recipe.totalNutrients.Protein.Quantity, 2)} g" +
+                    $"\nCarbohydrate: {Math.Round(Selection.SelectedItem.recipe.totalNutrients.Carbohydrate.Quantity,2)} g" +
+                    $"\nIron: {Math.Round(Selection.SelectedItem.recipe.totalNutrients.Iron.Quantity,2)} mg";
+    }
+    
+    public async Task Copy()
+    {
+        string copiedText = $"{SelectedRecipe.recipe.Author} {SelectedRecipe.recipe.Title}";
+
+        CrossClipboard.Current.SetText(copiedText);
+    }
+    
+    private string _nutrients;
+    public string Nutrients
+    {
+        get => _nutrients;
+        set
+        {
+            _nutrients = value;
+            OnPropertyChanged();
+        }
     }
 
+    private bool _isSelectedRecipeVisible;
+
+    public bool IsSelectedRecipeVisible
+    {
+        get => _isSelectedRecipeVisible;
+        set
+        {
+            _isSelectedRecipeVisible = value;
+            OnPropertyChanged();
+        }
+    }
+    
     public ICommand GetUserInput { get; }
     
     private async void ChangeMessage(string usrInput)
@@ -171,7 +235,7 @@ public class MainViewModel :  INotifyPropertyChanged, IReactiveObject
     }
     
     private static JsonRecipe jsonRecipe { get; set; }
-    
+
     public ICommand ContactCommand { get; }
     public async Task Contact()
     {
@@ -183,6 +247,11 @@ public class MainViewModel :  INotifyPropertyChanged, IReactiveObject
     public void CloseRecipes()
     {
         IsRecipesVisible = false;
+    }
+
+    public void CloseSelectedRecipe()
+    {
+        IsSelectedRecipeVisible = false;
     }
     
     public void NutrientModChange()
@@ -303,4 +372,6 @@ public class MainViewModel :  INotifyPropertyChanged, IReactiveObject
     {
         
     }
+
+    
 }

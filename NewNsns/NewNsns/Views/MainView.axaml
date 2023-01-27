@@ -47,7 +47,6 @@
                              <!-- TODO Кнопки Избранное и Связь -->
                              <Button Name="FavoritesBtn" Content="Favorites"/>
                              <Button Name="ContactBtn" Content="Contact us" Margin="0,10,0,0" Command="{Binding ContactCommand}"/>
-                             
                          </StackPanel>
                      </MenuFlyout>
                  </FlyoutBase.AttachedFlyout>
@@ -70,8 +69,7 @@
                     Command="{Binding NutrientModChange}">
                 Nutrients
             </Button>
-
-            <!-- TODO Режим рецептов --> 
+            
             <Button Name="RecipeBtn" Width="110" CornerRadius="15" Background="LightGray"
                     HorizontalContentAlignment="Center"
                     FontSize="20" Margin="10,0,10,0"
@@ -122,15 +120,17 @@
                 Click="SearchBtn_OnClick">
         </Button>
         
+        <!-- Кнопка закрытия рецептов -->
         <Button Name="CloseRecipes" Grid.Column="3" Grid.Row="1" Grid.RowSpan="2"
                 Content="X" Background="Red" Margin="0,0,0,17"
                 Command="{Binding CloseRecipes}" IsVisible="{Binding IsRecipesVisible}"/>
         
+        <!-- Список рецептов -->
         <ListBox Name="ListBox" IsVisible="{Binding IsRecipesVisible}" Grid.Row="2" Grid.Column="2" 
                  Grid.RowSpan="3" Margin="0,20,0,0"
                  Items="{Binding Recipes}" 
                  AutoScrollToSelectedItem="False" CornerRadius="15" ScrollViewer.VerticalScrollBarVisibility = "Visible"
-                 ScrollViewer.AllowAutoHide="False">
+                 ScrollViewer.AllowAutoHide="False" Selection="{Binding Selection}" SelectedItem="{Binding SelectedRecipe}">
             
             <ListBox.ItemTemplate>
                 <DataTemplate>
@@ -139,8 +139,7 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="Auto" MaxHeight="48"/>
-                            <RowDefinition Height="Auto" MaxHeight="48"/>
-                            <RowDefinition Height="100"/>
+                            <RowDefinition Height="50"/>
                             <RowDefinition Height="Auto" MaxHeight="48"/>
                         </Grid.RowDefinitions>
                         
@@ -162,16 +161,16 @@
                             <TextBlock Grid.Row="2" Text="{Binding recipe.Author}" TextAlignment="Center"/>    
                         </StackPanel>
                         
-                        <ListBox Grid.Row="3" Grid.ColumnSpan="2" HorizontalAlignment="Center" Width="260"
+                        <!--<ListBox Grid.Row="3" Grid.ColumnSpan="2" HorizontalAlignment="Center" Width="260"
                                  Items="{Binding recipe.ingredientLines}" AutoScrollToSelectedItem="False"
                                  ScrollViewer.VerticalScrollBarVisibility = "Visible"
-                                 ScrollViewer.AllowAutoHide="False">
+                                 ScrollViewer.AllowAutoHide="True">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding}" HorizontalAlignment="Center" FontSize="10"/>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
-                        </ListBox>
+                        </ListBox>-->
                         
                         <StackPanel Grid.Row="4" Orientation="Horizontal">
                             <TextBlock Text="Calories: "/>
@@ -182,13 +181,76 @@
                             <TextBlock Text="Weight: "/>
                             <TextBlock Text="{Binding recipe.totalWeight}"/>
                         </StackPanel>
-                        
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+        
+        <!-- Выбранный рецепт -->
+        <Grid Name="SelectedRecipe" Background="HoneyDew" ColumnSpan="4" RowSpan="6"
+              IsVisible="{Binding IsSelectedRecipeVisible}" ShowGridLines="False">
+            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="280"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="200"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="160"/>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="160"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            
+            <Button Grid.Column="2" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" Background="Red" Content="X" Command="{Binding CloseSelectedRecipe}" Margin="10,0,0,0"/>
+            <Image Grid.Column="1" Grid.Row="1" asyncImageLoader:ImageLoader.Source="{Binding SelectedRecipe.recipe.image}"/>
+            <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding SelectedRecipe.recipe.Title}"
+                       Foreground="Black" FontSize="20" TextAlignment="Center"/>
+            
+            <StackPanel Grid.Column="1" Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock Grid.Column="1" Grid.Row="3" Text="by  "
+                           Foreground="Black" TextAlignment="Center"/>
+                <TextBlock Grid.Column="1" Grid.Row="3" Text="{Binding SelectedRecipe.recipe.Author}"
+                           Foreground="Black" TextAlignment="Center"/>
+            </StackPanel>
+            
+            <ListBox Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" Width="350"
+                     Items="{Binding SelectedRecipe.recipe.ingredientLines}" AutoScrollToSelectedItem="False"
+                     ScrollViewer.VerticalScrollBarVisibility = "Visible"
+                     ScrollViewer.AllowAutoHide="True">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock Text="{Binding}" HorizontalAlignment="Center" FontSize="15" TextWrapping="Wrap"/>
+                            <Border BorderBrush="Gray" BorderThickness="0,0,0,1"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            
+            <TextBlock Grid.Column="1" Grid.Row="6" Name="RecipeNtr" Background="LightGray" Text="{Binding Nutrients}"
+                       TextAlignment="Center"
+                       FontSize="20" Foreground="Black" VerticalAlignment="Center"/>
+            
+            <Button Grid.Column="1" Grid.Row="7" Background="ForestGreen" HorizontalAlignment="Center" Width="100" Height="50"
+                    Content="Copy" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="20"
+                    Command="{Binding Copy}">
+                
+                <Button.Flyout>
+                      <Flyout>
+                          <TextBlock Text="Author and Title copied to clipboard!"/>
+                      </Flyout>  
+                </Button.Flyout>    
+            </Button>
+            
+        </Grid>
+        
     </Grid>
-    
 </UserControl>
 
 
