@@ -42,27 +42,11 @@ public class MainViewModel :  INotifyPropertyChanged, IReactiveObject
     public MainViewModel()
     {
         GetUserInput = ReactiveCommand.Create<string>(ChangeMessage);
-        ContactCommand = ReactiveCommand.Create(Contact);
         IsPrBarVisible = false;
         IsRecipesVisible = false;
         IsSelectedRecipeVisible = false;
 
-        string[] rcps = {
-            "1 cup long-grain white rice",
-            "1 3/4 cup water",
-            "Pinch of salt",
-            "Glug of olive oil",
-            "Glug of olive oil",
-            "Glug of olive oil"
-        };
-
-        string url = "https://edamam-product-images.s3.amazonaws.com/web-img/b71/b716942f16e3e9490829f7da8dba509e.jpg?X-Amz-Security-Token=IQoJb3JpZ2luX2VjEDMaCXVzLWVhc3QtMSJIMEYCIQD1yGJKVeerLPTfeBm83wWOEmQtro%2BnyJI0%2BNqyT3ZWUQIhAPbVPa2TDiFs1hEa%2BusXUzsaakuI%2BS9jVJpPwKzc0%2FEiKtUECIv%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQABoMMTg3MDE3MTUwOTg2Igxi6xT8ENASu9CuNF8qqQQDGUFXscZ5HW%2B5TRa%2FnlGvwa6jgOCLjGMiVN%2B7me30COLpeFPhG970%2FMq2TNkdaa7kNI1qPMhy8FTFHSkN1eeIdLd1uggHrZnWQUOkIiuItf5kMpJAx8TLmaUwNZ7evFZ%2FdllwS9LXBkQeDctPB6ucpvkbH9ogOUPsHlfkO0SD5iLYSpKtotMz25W8DWB%2FcYkrm8p90Omb46AxILeE2VeGTlysIuBM%2BSxAtvf4u9%2FiY9LrbBDOrAXiXqreoFq8vKXv61vgSrMzCAfp%2BApAUTuX%2BQpCFXvtLB95hLEie3SP4V%2B4QUryhE3SZA4h6Zg1S1QlBtFRFVQ3d9mbE%2BfoqS8X9Vo9wJeXkBiI%2Fq29GNGxo5GewNu2jNWy0DX331bWSJOs%2FVV9wq2vehi2ORv4m%2BajFG%2BZsH%2Fo3CPYa5zzJYlOG5fEKMZOopcIOERXapn5uJI3Bcfg1AINU0YEQbwP2rFQeMLe9QSfVu7ITVJ4LfiFd0biteKPg6ilreRjPEkGb41ty9k6ZferVwhk%2BZFZMyKjJm8GIAPBcUJwNUiB4PsPCfG3hmA4B7Yuh%2FTeOWXC0X5apHVaDWg2L3Kl5%2FTWvQrLOCVqpopnvzNGSXQq8%2Bz55aQNs5KUunwz%2FSua5akPh3TKxmJBoqxx2CxVcV8VRj%2Bsyjyq8IFsVmqyR4LVvPzLjAyrqDm3T3yNMW07bCbYKrufkgkJQhRIj8YJZFYaebLr65puKQMVykWGMMb29J0GOqgBsQED%2FEcM2r4IlxX1cDUMz17x5%2FnZ76yci%2FUJRm7wnot3yWCoNqXbDQq8s%2BS26rrTfc9aZ6nJ379TnlAZFIjUky7VBQy4A2CIVNuIvR5OZrK%2Bc60CLIv3Xt6wDWuR4lDOZxHR2okmgkQWM1bODKzmJKPMRWmaZMYrKAwryN6ENq6bDT1Ex6pz4dqKDhmKBKxB2z3GJIaPlN%2Bjy2DdVFZcHydKE1yppXoX&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20230110T112141Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Credential=ASIASXCYXIIFNBVJLEVA%2F20230110%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=8c263d118ef3c0332d744df0a975c0b4485a9fd65ca010cc75d235289146c8a2";
-        Recipe recipe = new Recipe(){Title = "Яйца на сале", image = url, Author = "Куплинов", calories = 100, totalWeight = 200, ingredientLines = rcps};
-        Hits hit = new Hits(){recipe = recipe};
-
         Recipes = new ObservableCollection<Hits>{};
-
-        Recipes.Add(hit);
         
         Selection = new SelectionModel<Hits>();
         Selection.SelectionChanged += SelectionChanged;
@@ -235,14 +219,7 @@ public class MainViewModel :  INotifyPropertyChanged, IReactiveObject
     }
     
     private static JsonRecipe jsonRecipe { get; set; }
-
-    public ICommand ContactCommand { get; }
-    public async Task Contact()
-    {
-        var uri = "https://vk.com/forbess357";
-        
-        //await Browser.OpenAsync(uri, BrowserLaunchMode.SystemPreferred);
-    }
+    
 
     public void CloseRecipes()
     {
@@ -330,8 +307,6 @@ public class MainViewModel :  INotifyPropertyChanged, IReactiveObject
         } 
     }
 
-    public ICommand OpenWebCommand { get; }
-
     private bool _isPrBarVisible;
 
     public bool IsPrBarVisible
@@ -372,6 +347,4 @@ public class MainViewModel :  INotifyPropertyChanged, IReactiveObject
     {
         
     }
-
-    
 }

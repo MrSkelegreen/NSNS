@@ -22,7 +22,6 @@
         
         <!-- Разметка -->
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="35" />
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*" />
@@ -36,29 +35,12 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-
-        <!--  Боковая панель  -->
-        <StackPanel Background="LightGray" Grid.RowSpan="8" Orientation="Vertical">
-            <Image Name="SettingsBtn" Source="../Assets/cog.png"
-                   Tapped="SettingsBtn_OnTapped">
-                 <FlyoutBase.AttachedFlyout>
-                     <MenuFlyout>
-                         <StackPanel Height="1000" Width="100">
-                             <!-- TODO Кнопки Избранное и Связь -->
-                             <Button Name="FavoritesBtn" Content="Favorites"/>
-                             <Button Name="ContactBtn" Content="Contact us" Margin="0,10,0,0" Command="{Binding ContactCommand}"/>
-                         </StackPanel>
-                     </MenuFlyout>
-                 </FlyoutBase.AttachedFlyout>
-            </Image>
-        </StackPanel>
-
-        <!--  TODO Картинки на фон  -->
+        
         <!--  Выбор режима  -->
-        <Border Grid.Row="1" Grid.Column="2" BorderThickness="5" BorderBrush="Gray" CornerRadius="15" Height="50" Width="260"/>
+        <Border Grid.Row="1" Grid.Column="1" BorderThickness="5" BorderBrush="Gray" CornerRadius="15" Height="50" Width="260"/>
         
         <StackPanel
-            Grid.Column="2"
+            Grid.Column="1"
             Grid.Row="1"
             Orientation="Horizontal" Width="260" Height="50">
 
@@ -81,10 +63,10 @@
         </StackPanel>
         
         <!-- Поле для ввода -->
-        <TextBox Name="TBox" Grid.Column="2" Grid.Row="3" Width="300" Height="50" Watermark="Type something like: 200 g chicken"
+        <TextBox Name="TBox" Grid.Column="1" Grid.Row="3" Width="300" Height="50" Watermark="Type something like: 200 g chicken"
                  FontSize="16" TextAlignment="Center" VerticalContentAlignment="Center" CornerRadius="15"/>
         
-        <ProgressBar Grid.Column="2" Grid.Row="5" VerticalAlignment="Top" Name="PrBar" 
+        <ProgressBar Grid.Column="1" Grid.Row="5" VerticalAlignment="Top" Name="PrBar" 
                      Background="LightGray" Height="20"
                      IsVisible="{Binding IsPrBarVisible}"
                      IsIndeterminate="True"
@@ -99,16 +81,14 @@
         </ProgressBar>
         
         <!-- Окно вывода --> 
-        <!-- TODO Предупреждения -->
-        <!-- TODO Анимацию вывода сообщений об ошибках -->
-        <StackPanel Grid.Row="4" Grid.Column="2" VerticalAlignment="Center">
+        <StackPanel Grid.Row="4" Grid.Column="1" VerticalAlignment="Center">
             <TextBlock Name="TBlock" Background="LightGray" Text="{Binding Message}"
                        TextAlignment="Center" IsVisible="{Binding IsTboxVisible}"
                        FontSize="20" Foreground="Black" VerticalAlignment="Center"/>  
         </StackPanel>
         
         <!--  Поиск  -->
-        <Button Grid.Column="2" Grid.Row="5"
+        <Button Grid.Column="1" Grid.Row="5"
                 CornerRadius="15"
                 Name="SearchBtn"
                 Background="Black"
@@ -121,12 +101,12 @@
         </Button>
         
         <!-- Кнопка закрытия рецептов -->
-        <Button Name="CloseRecipes" Grid.Column="3" Grid.Row="1" Grid.RowSpan="2"
+        <Button Name="CloseRecipes" Grid.Column="2" Grid.Row="1" Grid.RowSpan="2"
                 Content="X" Background="Red" Margin="0,0,0,17"
                 Command="{Binding CloseRecipes}" IsVisible="{Binding IsRecipesVisible}"/>
         
         <!-- Список рецептов -->
-        <ListBox Name="ListBox" IsVisible="{Binding IsRecipesVisible}" Grid.Row="2" Grid.Column="2" 
+        <ListBox Name="ListBox" IsVisible="{Binding IsRecipesVisible}" Grid.Row="2" Grid.Column="1" 
                  Grid.RowSpan="3" Margin="0,20,0,0"
                  Items="{Binding Recipes}" 
                  AutoScrollToSelectedItem="False" CornerRadius="15" ScrollViewer.VerticalScrollBarVisibility = "Visible"
@@ -161,17 +141,6 @@
                             <TextBlock Grid.Row="2" Text="{Binding recipe.Author}" TextAlignment="Center"/>    
                         </StackPanel>
                         
-                        <!--<ListBox Grid.Row="3" Grid.ColumnSpan="2" HorizontalAlignment="Center" Width="260"
-                                 Items="{Binding recipe.ingredientLines}" AutoScrollToSelectedItem="False"
-                                 ScrollViewer.VerticalScrollBarVisibility = "Visible"
-                                 ScrollViewer.AllowAutoHide="True">
-                            <ListBox.ItemTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding}" HorizontalAlignment="Center" FontSize="10"/>
-                                </DataTemplate>
-                            </ListBox.ItemTemplate>
-                        </ListBox>-->
-                        
                         <StackPanel Grid.Row="4" Orientation="Horizontal">
                             <TextBlock Text="Calories: "/>
                             <TextBlock Text="{Binding recipe.calories}" TextAlignment="Left" />
@@ -187,7 +156,7 @@
         </ListBox>
         
         <!-- Выбранный рецепт -->
-        <Grid Name="SelectedRecipe" Background="HoneyDew" ColumnSpan="4" RowSpan="6"
+        <Grid Name="SelectedRecipe" Background="HoneyDew" ColumnSpan="3" RowSpan="6"
               IsVisible="{Binding IsSelectedRecipeVisible}" ShowGridLines="False">
             
             <Grid.ColumnDefinitions>
@@ -247,9 +216,7 @@
                       </Flyout>  
                 </Button.Flyout>    
             </Button>
-            
         </Grid>
-        
     </Grid>
 </UserControl>
 
